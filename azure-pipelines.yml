@@ -62,7 +62,8 @@ steps:
     targetType: 'inline'
     script: |
       npm install -g appcenter-cli
-      appcenter apps list --token $env:APPCENTER_ACCESS_TOKEN 
-      appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes "DO NOT INSTALL" --token $env:APPCENTER_ACCESS_TOKEN
+      #appcenter apps list --token $env:APPCENTER_ACCESS_TOKEN
+      appcenter profile list --token $env:APPCENTER_ACCESS_TOKEN
+      #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes "DO NOT INSTALL" --token $env:APPCENTER_ACCESS_TOKEN
       #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $env:APPCENTER_ACCESS_TOKEN
     workingDirectory: '$(Build.ArtifactStagingDirectory)'
