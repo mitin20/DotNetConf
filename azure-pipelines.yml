@@ -48,11 +48,18 @@ steps:
   inputs:
     versionSpec: 12
 
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/Calculator.zip'
+    replaceExistingArchive: true
+
 - task: CmdLine@2
   inputs:
     script: |
       ls
-      zip -r Calculator.zip DotNetConf.exe DotNetConf.pdb
       npm install -g appcenter-cli
       appcenter apps list --token $(APPCENTER_ACCESS_TOKEN)
       appcenter profile list --token $(APPCENTER_ACCESS_TOKEN)
