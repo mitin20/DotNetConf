@@ -52,11 +52,12 @@ steps:
   inputs:
     script: |
       ls
+      zip -r Calculator.zip DotNetConf.exe DotNetConf.pdb
       npm install -g appcenter-cli
       appcenter apps list --token $(APPCENTER_ACCESS_TOKEN)
       appcenter profile list --token $(APPCENTER_ACCESS_TOKEN)
-      #appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN) --build-version 0.0.0
-      #appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $(APPCENTER_ACCESS_TOKEN) --build-version 0.0.0
+      appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN) --build-version $(Build.BuildNumber)
+      #appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $(APPCENTER_ACCESS_TOKEN) --build-version $(Build.BuildNumber)
     workingDirectory: '$(Build.ArtifactStagingDirectory)'
   displayName: Distribute to AppCenter   
 
