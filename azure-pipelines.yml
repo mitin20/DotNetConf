@@ -31,7 +31,7 @@ steps:
   inputs:
     serverEndpoint: 'AppCenterAT'
     appSlug: 'mitin18/DotNetConf'
-    appFile: '$(Build.ArtifactStagingDirectory)'
+    appFile: '$(Build.ArtifactStagingDirectory)/DotNetConf.exe'
     buildVersion: '0.0.0'
     releaseNotesOption: 'input'
     releaseNotesInput: 'Just a test. Do not install!'
