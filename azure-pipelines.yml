@@ -26,3 +26,15 @@ steps:
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)'
     artifact: 'Calculator'
+
+- task: AppCenterDistribute@3
+  inputs:
+    serverEndpoint: 'AppCenterAT'
+    appSlug: 'mitin18/DotNetConf'
+    appFile: '$(Build.ArtifactStagingDirectory)'
+    buildVersion: '0.0.0'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'Just a test. Do not install!'
+    destinationType: 'groups'
+    distributionGroupId: '2321d135-1e8e-4f7f-9000-fb04ff5709e8'
+
