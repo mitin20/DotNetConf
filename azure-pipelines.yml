@@ -48,15 +48,15 @@ steps:
   inputs:
     versionSpec: 12
 
-- script: |
+- powershell: |
    npm install -g appcenter-cli
   displayName: 'Install cli'    
   
-- script: |
+- powershell: |
    appcenter apps list --token $(APPCENTER_ACCESS_TOKEN) 
   displayName: 'Test cli'    
 
-- script: |
+- powershell: |
    echo Distribute using cli
    #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN)
    #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $(APPCENTER_ACCESS_TOKEN)   
