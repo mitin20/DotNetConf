@@ -48,17 +48,21 @@ steps:
   inputs:
     versionSpec: 12
 
-- powershell: |
-   npm install -g appcenter-cli
-  displayName: 'Install cli'    
-  
-- powershell: |
-   appcenter apps list --token $(APPCENTER_ACCESS_TOKEN) 
-  displayName: 'Test cli'    
+- task: CmdLine@2
+  inputs:
+    script: |
+      npm install -g appcenter-cli
+      appcenter apps list --token $(APPCENTER_ACCESS_TOKEN) 
+      appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN)
+      #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $(APPCENTER_ACCESS_TOKEN)
+    workingDirectory: '$(Build.ArtifactStagingDirectory)'
 
-- powershell: |
-   echo Distribute using cli
-   #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN)
-   #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $(APPCENTER_ACCESS_TOKEN)   
-  workingDirectory: '$(Build.ArtifactStagingDirectory)'
-  displayName: 'Distribute using cli'     
+# - task: PowerShell@2
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       npm install -g appcenter-cli
+#       appcenter apps list --token $env:APPCENTER_ACCESS_TOKEN 
+#       appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes "DO NOT INSTALL" --token $env:APPCENTER_ACCESS_TOKEN
+#       #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $env:APPCENTER_ACCESS_TOKEN
+#     workingDirectory: '$(Build.ArtifactStagingDirectory)'
