@@ -4,10 +4,14 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
+# variables:
+#   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+#   buildConfiguration: 'Release'
+
 variables:
-  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-  buildConfiguration: 'Release'
-  group: Credentials  
+- group: Versions
+- group: Credentials
+- group: Misc
 
 steps:
 - task: UseDotNet@2
