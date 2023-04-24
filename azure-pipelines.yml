@@ -32,22 +32,6 @@ steps:
     targetPath: '$(Build.ArtifactStagingDirectory)'
     artifact: 'Calculator'
 
-# - task: AppCenterDistribute@3
-#   inputs:
-#     serverEndpoint: 'AppCenterAT'
-#     appSlug: 'mitin18/DotNetConf'
-#     appFile: '$(Build.ArtifactStagingDirectory)/DotNetConf.exe'
-#     buildVersion: '0.0.0'
-#     releaseNotesOption: 'input'
-#     releaseNotesInput: 'Just a test. Do not install!'
-#     destinationType: 'groups'
-#     distributionGroupId: '2321d135-1e8e-4f7f-9000-fb04ff5709e8'
-
-- task: NodeTool@0
-  displayName: 'Use Node 12'
-  inputs:
-    versionSpec: 12
-
 - task: ArchiveFiles@2
   inputs:
     rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
@@ -56,17 +40,33 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/Calculator.zip'
     replaceExistingArchive: true
 
-- task: CmdLine@2
+- task: AppCenterDistribute@3
   inputs:
-    script: |
-      ls
-      npm install -g appcenter-cli
-      appcenter apps list --token $(APPCENTER_ACCESS_TOKEN)
-      #appcenter profile list --token $(APPCENTER_ACCESS_TOKEN)
-      #appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN) --build-version $(Build.BuildNumber)
-      #appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $(APPCENTER_ACCESS_TOKEN) --build-version $(Build.BuildNumber)
-    workingDirectory: '$(Build.ArtifactStagingDirectory)'
-  displayName: Distribute to AppCenter   
+    serverEndpoint: 'AppCenterAT'
+    appSlug: 'mitin18/DotNetConf'
+    appFile: '$(Build.ArtifactStagingDirectory)/Calculator.zip'
+    buildVersion: '0.0.1'
+    releaseNotesOption: 'input'
+    releaseNotesInput: 'Just a test. Do not install!'
+    destinationType: 'groups'
+    distributionGroupId: '2321d135-1e8e-4f7f-9000-fb04ff5709e8'
+
+# - task: NodeTool@0
+#   displayName: 'Use Node 12'
+#   inputs:
+#     versionSpec: 12
+
+# - task: CmdLine@2
+#   inputs:
+#     script: |
+#       ls
+#       npm install -g appcenter-cli
+#       appcenter apps list --token $(APPCENTER_ACCESS_TOKEN)
+#       #appcenter profile list --token $(APPCENTER_ACCESS_TOKEN)
+#       #appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN) --build-version $(Build.BuildNumber)
+#       #appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $(APPCENTER_ACCESS_TOKEN) --build-version $(Build.BuildNumber)
+#     workingDirectory: '$(Build.ArtifactStagingDirectory)'
+#   displayName: Distribute to AppCenter   
 
 # - task: PowerShell@2
 #   inputs:
