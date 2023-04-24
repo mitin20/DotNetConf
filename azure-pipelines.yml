@@ -46,8 +46,15 @@ steps:
 
 - script: |
    npm install -g appcenter-cli
+  displayName: 'Install cli'    
+  
+- script: |
    appcenter apps list --token $(APPCENTER_ACCESS_TOKEN) 
-   appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN)
+  displayName: 'Test cli'    
+
+- script: |
+   echo Distribute using cli
+   #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN)
    #appcenter distribute release --app mitin18/DotNetConf --file DotNetConf.exe --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $(APPCENTER_ACCESS_TOKEN)   
   workingDirectory: '$(Build.ArtifactStagingDirectory)'
-  displayName: 'Distribute using cli'    
+  displayName: 'Distribute using cli'     
