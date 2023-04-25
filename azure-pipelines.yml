@@ -4,14 +4,9 @@ trigger:
 pool:
   vmImage: 'windows-latest'
 
-# variables:
-#   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
-#   buildConfiguration: 'Release'
-
 variables:
-- group: Versions
-- group: Credentials
-- group: Misc
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  buildConfiguration: 'Release'
 
 steps:
 - task: UseDotNet@2
@@ -50,27 +45,3 @@ steps:
     releaseNotesInput: 'Just a test. Do not install!'
     destinationType: 'groups'
     distributionGroupId: '2321d135-1e8e-4f7f-9000-fb04ff5709e8'
-
-# - task: NodeTool@0
-#   displayName: 'Use Node 12'
-#   inputs:
-#     versionSpec: 12
-
-# - task: CmdLine@2
-#   inputs:
-#     script: |
-#       ls
-#       npm install -g appcenter-cli
-#       appcenter apps list --token $(APPCENTER_ACCESS_TOKEN)
-#       #appcenter profile list --token $(APPCENTER_ACCESS_TOKEN)
-#       #appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes "DO NOT INSTALL" --token $(APPCENTER_ACCESS_TOKEN) --build-version $(Build.BuildNumber)
-#       #appcenter distribute release --app mitin18/DotNetConf --file Calculator.zip --group "Internal" --release-notes-file RELEASE_NOTES/releasenotes.txt --token $(APPCENTER_ACCESS_TOKEN) --build-version $(Build.BuildNumber)
-#     workingDirectory: '$(Build.ArtifactStagingDirectory)'
-#   displayName: Distribute to AppCenter   
-
-# - task: PowerShell@2
-#   inputs:
-#     targetType: 'inline'
-#     script: |
-#       echo add commands here
-#     workingDirectory: '$(Build.ArtifactStagingDirectory)'
