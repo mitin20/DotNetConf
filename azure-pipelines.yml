@@ -45,7 +45,7 @@ steps:
     serverEndpoint: 'AppCenterAT'
     appSlug: 'mitin18/DotNetConf'
     appFile: '$(Build.ArtifactStagingDirectory)/Calculator.zip'
-    buildVersion: '0.0.1'
+    buildVersion: '$(Build.BuildNumber)'
     releaseNotesOption: 'input'
     releaseNotesInput: 'Just a test. Do not install!'
     destinationType: 'groups'
